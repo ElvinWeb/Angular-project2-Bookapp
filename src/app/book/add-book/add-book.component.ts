@@ -22,11 +22,9 @@ export class AddBookComponent {
   Title: string = '';
 
   @Input() BookDetails: Array<BookList> = [];
-  @Output() BookAdded = new EventEmitter<string>();
   @Output('addBook') Book = new EventEmitter<BookList>();
   NgForm: any;
-
-  addnewbook() {
+  addnewbook(): void {
     this.Book.emit({
       bookname: this.BookName,
       author: this.Author,
@@ -37,9 +35,8 @@ export class AddBookComponent {
   }
 
   submit: boolean = false;
-
-  onSubmit(form: NgForm) {
-    if (!form.valid) {
+  onSubmit(Bookappform: NgForm) {
+    if (!Bookappform.valid) {
       this.submit = true;
       return;
     }
