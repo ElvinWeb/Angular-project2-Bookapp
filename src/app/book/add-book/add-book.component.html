@@ -12,13 +12,12 @@
           class="input"
           type="text"
           placeholder="Book name "
-          [(ngModel)]="BookName"
           name="bookname"
+          [(ngModel)]="BookName"
           ngModel
           required
           #bookname="ngModel"
         />
-        <div class="cut"></div>
 
         <div
           class="alert alert-danger"
@@ -39,11 +38,10 @@
           required
           #author="ngModel"
         />
-        <div class="cut"></div>
 
         <div
           class="alert alert-danger"
-          *ngIf="!author.valid || (author.touched && submit)"
+          *ngIf="!author.valid || (bookname.touched && submit)"
         >
           please enter the Authorname !
         </div>
@@ -61,11 +59,10 @@
           #pagecount="ngModel"
           min="80"
         />
-        <div class="cut"></div>
 
         <div
           class="alert alert-danger"
-          *ngIf="!pagecount.valid || (pagecount.touched && submit)"
+          *ngIf="!pagecount.valid || (bookname.touched && submit)"
         >
           page count at least 80!
         </div>
@@ -86,7 +83,7 @@
         />
         <div
           class="alert alert-danger"
-          *ngIf="!price.valid || (price.touched && submit)"
+          *ngIf="!price.valid || (bookname.touched && submit)"
         >
           price should be min 5 max 50!
         </div>
@@ -105,7 +102,7 @@
         />
         <div
           class="alert alert-danger"
-          *ngIf="!title.valid || (title.touched && submit)"
+          *ngIf="!title.valid || (bookname.touched && submit)"
         >
           please enter the title!
         </div>
@@ -115,6 +112,10 @@
         class="submit"
         (click)="addnewbook()"
         [disabled]="!Bookappform.valid"
+        [disabled]="onCheck()"
+        [ngStyle]="{
+          'background-color': BookDetails.length > 3 ? 'red' : '#52b788'
+        }"
       >
         Order
       </button>

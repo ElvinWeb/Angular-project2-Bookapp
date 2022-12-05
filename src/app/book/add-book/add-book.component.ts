@@ -21,7 +21,7 @@ export class AddBookComponent {
   Price: any;
   Title: string = '';
 
-  @Input() BookDetails: Array<BookList> = [];
+  @Input('booklist') BookDetails: Array<BookList> = [];
   @Output('addBook') Book = new EventEmitter<BookList>();
   NgForm: any;
   addnewbook(): void {
@@ -35,10 +35,19 @@ export class AddBookComponent {
   }
 
   submit: boolean = false;
+  @ViewChild('Bookappform') fr!: NgForm;
+
   onSubmit(Bookappform: NgForm) {
     if (!Bookappform.valid) {
       this.submit = true;
       return;
+    }
+  }
+  onCheck() {
+    if (this.BookDetails.length >= 6) {
+      return true;
+    } else {
+      return false;
     }
   }
 }
